@@ -1,9 +1,7 @@
-AerialAssistSim
+StrongholdSim
 ===============
 
-3D Sandbox Simulation for the 2014 <a href="www.usfirst.org/roboticsprograms/frc">FIRST Robotics Competition</a> game, Aerial Assist.
-
-Live demo and downloads at <a href="http://thecatalystis.com/AerialAssist/">http://thecatalystis.com/AerialAssist/</a>
+3D Sandbox Simulation for the 2016 <a href="http://www.firstinspires.org/robotics/frc">FIRST Robotics Competition</a> game, FIRST Stronghold.
 
 <a href="https://github.com/rcahoon/FRC-VR-Connector">VR Connector</a> can be used to control the virtual robots from Java
 
