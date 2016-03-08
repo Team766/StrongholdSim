@@ -39,8 +39,6 @@ public class Gripper : MonoBehaviour
 		
 		if (holding)
 			holding.transform.position = payload.transform.position;
-		
-		holding = null; 
 	}
 	
 	void Update()
@@ -48,6 +46,15 @@ public class Gripper : MonoBehaviour
 		if (state)
 		{
 			this.transform.localEulerAngles = rotationOut;
+
+            if (payload.Get() == null)
+            {
+                holding = null;
+            }
+            if (holding == null && payload.Get() != null)
+            {
+                MoveIn();
+            }
 		}
 		else
 		{

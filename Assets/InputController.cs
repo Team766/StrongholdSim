@@ -12,9 +12,9 @@ public class InputController : MonoBehaviour
 	
 	void OnGUI()
 	{
-    Rect r = guiRect;
-    if (r.x < 0) r.x += Screen.width;
-    if (r.y < 0) r.y += Screen.height;
+        Rect r = guiRect;
+        if (r.x < 0) r.x += Screen.width;
+        if (r.y < 0) r.y += Screen.height;
     
 		GUILayout.BeginArea(r);
 		
@@ -47,10 +47,15 @@ public class InputController : MonoBehaviour
 			robot.SetGripper(true);
 		else if (gripper < 0)
 			robot.SetGripper(false);
+
+        if (Input.GetButton("P" + playerNumber + " Actuate"))
+			robot.Actuate();
 		
 		//TODO: robot.ShootPower = Mathf.Clamp01(robot.ShootPower + Input.GetAxis ("P" + playerNumber + " Shoot Power") * powerChangeSpeed * Time.deltaTime);
 		
 		if (Input.GetButton("P" + playerNumber + " Launch"))
 			robot.Launch();
-	}
+        if (Input.GetButton("P" + playerNumber + " Launch2"))
+            robot.Launch2();
+    }
 }

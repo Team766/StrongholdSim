@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class RobotController : MonoBehaviour {
 	public Wheel[] leftWheels;
@@ -8,6 +8,19 @@ public class RobotController : MonoBehaviour {
 	
 	public Gripper gripper;
 	public Launcher launcher;
+    public Launcher launcher2;
+    public Dictionary<ActuatedDefense, int> actuatedDefenses = new Dictionary<ActuatedDefense, int>();
+
+    public void Actuate()
+    {
+        foreach (var d in actuatedDefenses)
+        {
+            if (d.Value > 0)
+            {
+                d.Key.Actuate(this);
+            }
+        }
+    }
 	
 	public void SetMotors(float left, float right)
 	{
@@ -44,6 +57,11 @@ public class RobotController : MonoBehaviour {
 	public void Launch()
 	{
 		launcher.Launch();
+	}
+
+    public void Launch2()
+	{
+		launcher2.Launch();
 	}
   
   public int LeftEncoder

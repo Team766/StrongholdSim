@@ -2,9 +2,10 @@
 using System.Collections;
 
 public class Goal : MonoBehaviour {
-	
+
+    public bool isBlue;
+    public bool highGoal;
 	public Transform respawnPoint;
-	public string message;
 	public GUIStyle messageStyle;
 	bool messageShowing = false;
 	
@@ -12,7 +13,7 @@ public class Goal : MonoBehaviour {
 	{
 		if (messageShowing)
 		{
-			GUILayout.Label(message, messageStyle);
+			GUILayout.Label((isBlue ? "BLUE" : "RED") + " HIGH GOAL!", messageStyle);
 		}
 	}
 	
@@ -27,12 +28,15 @@ public class Goal : MonoBehaviour {
 	IEnumerator RespawnBall(Collider c)
 	{
 		messageShowing = true;
-		yield return new WaitForSeconds(2f);
-		
-		messageShowing = false;
-		
+
+        yield return new WaitForSeconds(0.5f);
+
 		c.transform.position = respawnPoint.position;
 		c.GetComponent<Rigidbody>().velocity = Vector3.zero;
 		c.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+        yield return new WaitForSeconds(1.5f);
+		
+		messageShowing = false;
 	}
 }

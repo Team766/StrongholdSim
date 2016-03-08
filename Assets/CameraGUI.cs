@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[ExecuteInEditMode]
 public class CameraGUI : MonoBehaviour
 {
 	public Camera[] camerasLeft;
@@ -32,7 +33,7 @@ public class CameraGUI : MonoBehaviour
 			GUILayout.BeginVertical();
 				CameraSelection(camerasRight, ref rightCamera);
 			GUILayout.EndVertical();
-      GUILayout.Space(20);
+            GUILayout.Space(20);
 		GUILayout.EndHorizontal();
 		
 		if (rightCamera)

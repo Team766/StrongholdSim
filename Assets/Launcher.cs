@@ -13,9 +13,10 @@ public class Launcher : MonoBehaviour
 	{
 		if (gripper.holding)
 		{
-			gripper.holding.AddForce(this.transform.forward * Mathf.Clamp01(ShootPower) * maxForce, ForceMode.Impulse);
-			
-			gripper.Drop();
+            var projectile = gripper.holding;
+            gripper.Drop();
+            projectile.transform.position = this.transform.position;
+			projectile.AddForce(this.transform.forward * Mathf.Clamp01(ShootPower) * maxForce, ForceMode.Impulse);
 		}
 	}
 }

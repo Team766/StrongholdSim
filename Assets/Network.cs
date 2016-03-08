@@ -73,7 +73,7 @@ public class Network : MonoBehaviour {
             Application.LoadLevel(Application.loadedLevel);
           }
           
-          teleop.enabled = false;
+          teleop.gameObject.SetActive(false);
           robot.SetMotors(commands[LEFT_MOTOR] / 512.0f, commands[RIGHT_MOTOR] / 512.0f);
           robot.SetGripper(commands[INTAKE] >= 0);
           if (commands[LAUNCH] >= 256) {
@@ -84,7 +84,7 @@ public class Network : MonoBehaviour {
       
       lastCommand = DateTime.Now;
     } else if (DateTime.Now - lastCommand > TimeSpan.FromSeconds(1)) {
-      teleop.enabled = true;
+      teleop.gameObject.SetActive(true);
     }
   }
 }
