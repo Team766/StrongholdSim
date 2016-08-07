@@ -26,6 +26,11 @@ public class Network : MonoBehaviour {
   const int HEADING = 12;
   const int INTAKE_STATE = 13;
   const int BALL_PRESENCE = 14;
+
+    const int JoystickStart = 20;
+    const int AxisPerJoystick = 4;
+
+    const int Joystick2_Axis4 = 27;
   
   void Awake() {
     udpClient = new UdpClient(commandsPort);
@@ -51,9 +56,14 @@ public class Network : MonoBehaviour {
       int[] values = new int[64];
       values[LEFT_ENCODER] = robot.LeftEncoder;
       values[RIGHT_ENCODER] = robot.RightEncoder;
-      values[HEADING] = (int)robot.Heading;
+      values[HEADING] = (int)robot.Gyro;
       values[INTAKE_STATE] = robot.GripperState ? 1 : -1;
       values[BALL_PRESENCE] = robot.BallPresence ? 1 : 0;
+            for (var j = 0; j < 2; ++j) {
+                for (var a = 0; a < AxisPerJoystick; ++a) {
+                    values[j * AxisPerJoystick + a + JoystickStart] = (int)(Input.GetAxis("j" + j + "a" + a) * 100);
+                }
+            }
       
       byte[] sendBytes = new byte[values.Length * sizeof(int)];
       Buffer.BlockCopy(values, 0, sendBytes, 0, sendBytes.Length);

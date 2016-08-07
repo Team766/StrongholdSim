@@ -35,7 +35,7 @@ public class InputController : MonoBehaviour
 		else
 		{
 			float drive = Input.GetAxis("P" + playerNumber + " Vertical");
-			float steer = Input.GetAxis("P" + playerNumber + " Horizontal");
+			float steer =-1* Input.GetAxis("P" + playerNumber + " Horizontal");
 			leftPower = Mathf.Clamp(drive + steer, -1, 1);
 			rightPower = Mathf.Clamp(drive - steer, -1, 1);
 		}

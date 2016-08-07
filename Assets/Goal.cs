@@ -13,7 +13,7 @@ public class Goal : MonoBehaviour {
 	{
 		if (messageShowing)
 		{
-			GUILayout.Label((isBlue ? "BLUE" : "RED") + " HIGH GOAL!", messageStyle);
+			GUILayout.Label((isBlue ? "BLUE" : "RED") + (highGoal ? " HIGH GOAL!" : " LOW GOAL!"), messageStyle);
 		}
 	}
 	

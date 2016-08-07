@@ -11,6 +11,17 @@ public class RobotController : MonoBehaviour {
     public Launcher launcher2;
     public Dictionary<ActuatedDefense, int> actuatedDefenses = new Dictionary<ActuatedDefense, int>();
 
+    private float headingPrev = 0.0f;
+
+    void Update()
+    {
+        var current = Heading;
+        var diff = Mathf.DeltaAngle(current, headingPrev);
+        Gyro += diff;
+        headingPrev = current;
+        Debug.Log(Gyro);
+    }
+
     public void Actuate()
     {
         foreach (var d in actuatedDefenses)
@@ -100,6 +111,11 @@ public class RobotController : MonoBehaviour {
     {
       return Angle360(Vector3.forward, transform.forward, Vector3.up);
     }
+  }
+
+  public float Gyro {
+    get;
+    private set;
   }
   
   public bool GripperState

@@ -18,7 +18,7 @@ public class RespawnBall : MonoBehaviour {
 		{
 			if (ball.position.y < transform.position.y)
 			{
-				var respawnPoint = ball.name.ToLower().Contains("red") ? redRespawnPoint : blueRespawnPoint;
+				var respawnPoint = ball.transform.position.z > 0? redRespawnPoint : blueRespawnPoint;
 				ball.transform.position = respawnPoint.position;
 				ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
 				ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
