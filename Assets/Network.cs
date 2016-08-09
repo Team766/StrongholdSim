@@ -19,8 +19,10 @@ public class Network : MonoBehaviour {
 	const int RIGHT_MOTOR = 11;
 	const int INTAKE = 12;
 	const int LAUNCH = 13;
-  
-  // Feedback indexes
+
+    // Feedback indexes
+    const int TIMESTAMP = 5;
+
   const int LEFT_ENCODER = 10;
   const int RIGHT_ENCODER = 11;
   const int HEADING = 12;
@@ -49,11 +51,15 @@ public class Network : MonoBehaviour {
       udpClient = null;
     }
   }
+
+  private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
   
   void Update() {
     if (DateTime.Now - lastFeedback > TimeSpan.FromMilliseconds(20)) {
       lastFeedback = DateTime.Now;
       int[] values = new int[64];
+      long timestamp = (long)(DateTime.UtcNow - UnixEpoch).TotalMilliseconds;
+      values[TIMESTAMP] = (int)timestamp;
       values[LEFT_ENCODER] = robot.LeftEncoder;
       values[RIGHT_ENCODER] = robot.RightEncoder;
       values[HEADING] = (int)robot.Gyro;
