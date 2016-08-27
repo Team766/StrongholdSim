@@ -41,12 +41,17 @@ public class InputController : MonoBehaviour
 		}
 		
 		robot.SetMotors(leftPower, rightPower);
-		
-		float gripper = Input.GetAxis ("P" + playerNumber + " Gripper");
-		if (gripper > 0)
-			robot.SetGripper(true);
-		else if (gripper < 0)
-			robot.SetGripper(false);
+
+        float intake = Input.GetAxis("P" + playerNumber + " intake");
+            robot.SetIntake(intake);
+
+        float gripper = Input.GetAxis ("P" + playerNumber + " Gripper");
+		//if (gripper > 0)
+			//robot.SetGripper(true);
+		//else if (gripper < 0)
+			//robot.SetGripper(false);
+
+        robot.SetIntakeArm(gripper);
 
         if (Input.GetButton("P" + playerNumber + " Actuate"))
 			robot.Actuate();

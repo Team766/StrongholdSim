@@ -5,11 +5,14 @@ public class RobotController : MonoBehaviour {
 	public Wheel[] leftWheels;
 	public Wheel[] rightWheels;
 	public float motorScaler;
+    public float intakeScaler;
 	
 	public Gripper gripper;
+    public IntakeArm intakeArm;
 	public Launcher launcher;
     public Launcher launcher2;
     public Dictionary<ActuatedDefense, int> actuatedDefenses = new Dictionary<ActuatedDefense, int>();
+    public Intake intake;
 
     private float headingPrev = 0.0f;
 
@@ -19,7 +22,6 @@ public class RobotController : MonoBehaviour {
         var diff = Mathf.DeltaAngle(current, headingPrev);
         Gyro += diff;
         headingPrev = current;
-        Debug.Log(Gyro);
     }
 
     public void Actuate()
@@ -44,16 +46,26 @@ public class RobotController : MonoBehaviour {
 			h.RunJoint(motorScaler * right);
 		}
 	}
-	
-	public void SetGripper(bool state)
+
+    public void SetIntake(float speed)
+    {
+        intake.setSpeed(speed);
+    }
+
+    public void SetGripper(bool state)
 	{
 		if (state)
 			gripper.MoveOut();
 		else
 			gripper.MoveIn();
 	}
-	
-	public float ShootPower
+
+    public void SetIntakeArm(float speed)
+    {
+            intakeArm.RunJoint(intakeScaler * speed);
+    }
+
+    public float ShootPower
 	{
 		get
 		{

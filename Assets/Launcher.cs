@@ -6,6 +6,8 @@ public class Launcher : MonoBehaviour
 	public float ShootPower;
 	
 	public Gripper gripper;
+
+    public Intake intake;
 	
 	public float maxForce;
 	
@@ -18,5 +20,13 @@ public class Launcher : MonoBehaviour
             projectile.transform.position = this.transform.position;
 			projectile.AddForce(this.transform.forward * Mathf.Clamp01(ShootPower) * maxForce, ForceMode.Impulse);
 		}
-	}
+
+        if (intake.holding)
+        {
+            var projectile = intake.holding;
+            intake.Drop();
+            projectile.transform.position = this.transform.position;
+            projectile.AddForce(this.transform.forward * Mathf.Clamp01(ShootPower) * maxForce, ForceMode.Impulse);
+        }
+    }
 }

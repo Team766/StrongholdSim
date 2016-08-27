@@ -28,9 +28,14 @@ public class Network : MonoBehaviour {
   const int HEADING = 12;
   const int INTAKE_STATE = 13;
   const int BALL_PRESENCE = 14;
+  const int ROBOT_MODE = 3;
 
     const int JoystickStart = 20;
     const int AxisPerJoystick = 4;
+    const int JoystickButtonStart = 40;
+    const int ButtonsPerJoystick = 8;
+    const int Teleop = 1;
+    const int Auton = 0;
 
     const int Joystick2_Axis4 = 27;
   
@@ -65,11 +70,17 @@ public class Network : MonoBehaviour {
       values[HEADING] = (int)robot.Gyro;
       values[INTAKE_STATE] = robot.GripperState ? 1 : -1;
       values[BALL_PRESENCE] = robot.BallPresence ? 1 : 0;
+      values[ROBOT_MODE] = Time.timeSinceLevelLoad < 15? Auton : Teleop;
             for (var j = 0; j < 2; ++j) {
                 for (var a = 0; a < AxisPerJoystick; ++a) {
                     values[j * AxisPerJoystick + a + JoystickStart] = (int)(Input.GetAxis("j" + j + "a" + a) * 100);
                 }
+                for (var b = 0; b < ButtonsPerJoystick; b++)
+                {
+                    values[j * ButtonsPerJoystick + b + JoystickButtonStart] = (int)(Input.GetKey("joystick " + (j + 1) + " button " + b) ? 1 : 0);
+                }
             }
+
       
       byte[] sendBytes = new byte[values.Length * sizeof(int)];
       Buffer.BlockCopy(values, 0, sendBytes, 0, sendBytes.Length);
